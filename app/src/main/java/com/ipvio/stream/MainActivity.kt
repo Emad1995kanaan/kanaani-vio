@@ -151,7 +151,10 @@ fun App(pick: Boolean = false) {
     CompositionLocalProvider(
         LocalDensity provides scaled,
         LocalBringIntoViewSpec provides SmoothSpec,
-        LocalOverscrollFactory provides null
+        LocalOverscrollFactory provides null,
+        // KANAANI VIO: right-to-left for Arabic (the player stays left-to-right, see below)
+        androidx.compose.ui.platform.LocalLayoutDirection provides
+            if (Lang.code() == "ar") androidx.compose.ui.unit.LayoutDirection.Rtl else androidx.compose.ui.unit.LayoutDirection.Ltr
     ) {
         val c = LocalContext.current
         var picked by remember { mutableStateOf(!pick) }
@@ -421,10 +424,13 @@ private fun AppContent() {
                 }
                 // New start from outside (e.g. reminder "Switch") during playback: rebuild the player
                 key(p) {
+                    // Timeline and Left/Right seeking keep their natural direction in Arabic too
+                    CompositionLocalProvider(androidx.compose.ui.platform.LocalLayoutDirection provides androidx.compose.ui.unit.LayoutDirection.Ltr) {
                     PlayerScreen(p, zap, liveAll, seriesItem) {
                         // Live: back in Live TV on the last watched channel (also after switching in the player)
                         if (p.live || p.archive != null) LastFocus.pending = History.ids.firstOrNull { id -> liveAll.any { it.id == id } }
                         playing = null
+                    }
                     }
                 }
             }

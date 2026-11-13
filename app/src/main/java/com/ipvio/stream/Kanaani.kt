@@ -18,4 +18,6 @@ val DictKanaani = """
 Anmelden¦Sign in
 Gib den Benutzernamen und das Passwort deines Kanaani-Abos ein.¦Enter the username and password of your Kanaani subscription.
 Willkommen bei KANAANI VIO¦Welcome to KANAANI VIO
+Über KANAANI VIO¦About KANAANI VIO
+Schon ein anderes Gerät mit KANAANI VIO? Spiele die Sicherung ein: Playlists, Zugangsdaten, Verlauf, Favoriten und Einstellungen sind danach sofort da.¦Already have another device with KANAANI VIO? Restore the backup: playlists, logins, history, favorites and settings are there right away.
 """
